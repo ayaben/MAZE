@@ -6,13 +6,15 @@ class Labyrinthe:
 ##creation de labyrinthe
 	cases = []
 	laby_string = ''
+	
+
 	def __init__(self, n=5, m=6):
 		self.n = n
 		self.m = m
 		self.creer_base_laby()
 		self.sortie = self.piece_aleatoire()
 		
-		self.afficher_laby()
+		#self.afficher_laby()
 		print("Sortie se situe: {}".format(self.sortie))
 
 	def creer_base_laby(self):
@@ -20,7 +22,7 @@ class Labyrinthe:
 		for i in range(0, self.n):
 			self.cases.append([])
 			for j in range(0, self.m):
-				val = 0 if random.randint(0,3) > 0 else 1
+				val = 0 if random.randint(0,2) > 0 else 1
 				self.cases[i].append(val)
 				
 
@@ -98,11 +100,11 @@ def cherche_sortie(laby, position):
 		or (position[1] > 0 and cherche_sortie(laby, [position[0], position[1]-1]))
 		or (position[0] > 0 and cherche_sortie(laby, [position[0]-1, position[1]]))
 		or (position[1] < (laby.m-1) and cherche_sortie(laby, [position[0], position[1]+1]))):
-		return True, chemin
+		return True
 	# On supprime la dernière case visitée car il n'y a plus de mouvement possible
 	chemin.pop()
 	# Si l'execution arrive jusqu'ici c'est qu'il n' y a plus de cases à tester donc pas de solution
-	return False, False
+	return False
 
 
 def position_initiale(laby):
